@@ -3,86 +3,13 @@
   <head>
     <meta charset="utf-8" />
     <title>Lista Telefonica</title>
-    <link rel="stylesheet" type="text/css" href="../_bootstrap/css/bootstrap.css">
-    <style type="text/css">
-      .jumbotron{
-        width: 600px;
-        margin-top: 20px;
-        margin-left: auto;
-        margin-right: auto;
-        padding: 20px;
-      }
-      h3{
-        text-align: center;
-        margin-bottom: 30px;
-      }
-      .table{
-        margin-top: 20px;
-      }
-      .form-control{
-        margin-bottom: 5px;
-      }
-      .selecionado{
-        background-color: yellow;
-      }
-      .negrito{
-        font-weight: bold;
-      }
-      hr{
-        border-color: #999;
-      }
-    </style>
-    <script src="../_angular/angular.js"></script>
-    <script src="../_angular/i18n/angular-locale_pt-br.js"></script>
-    <script src="../_angular/angular-messages.js"></script>
-    <script>
-    var app = angular.module("listaTelefonica",["ngMessages"]);
-    app.controller("listaTelefonicaCtrl", function($scope, $http){
-      $scope.app = "Lista Telefonica";
-      $scope.contatos = [];
-      $scope.operadoras = [];
-
-      var carregarContatos = function(){
-        $http.get("http://localhost/study-angular/rbranas/contatos.josn").success(function(data){
-          $scope.contatos = data;
-        }).error(function(data, status){
-          $scope.message = "Aconteceu um problema: " + data;
-        });
-      }
-      carregarContatos();
-      var carregarOperadoras = function(){
-        $http.get("http://localhost/study-angular/rbranas/operadoras.json").success(function(data){
-          $scope.operadoras = data;
-        });
-      }
-      carregarOperadoras();
-
-      $scope.adicionarContato = function(contato){
-        $scope.contatos.push(angular.copy(contato));
-        $http.post("http://localhost/study-angular/rbranas/contatos.php", contato).success(function(data){
-          delete $scope.contato;
-          $scope.contatoForm.$setPristine();
-          //carregarContatos();
-        });
-      };
-      $scope.apagarContato = function(contatos){
-        $scope.contatos = contatos.filter(function(contato){
-          if(!contato.selecionado){
-            return contato;
-          }
-        });
-      };
-      $scope.isContatoSelecionado = function(contatos){
-        return contatos.some(function(contato){
-          return contato.selecionado;
-        });
-      };
-      $scope.ordenarPor = function(campo){
-        $scope.criterioDeOrdenacao = campo
-        $scope.direcaoDaOrdenacao = ! $scope.direcaoDaOrdenacao;
-      };
-    });
-    </script>
+    <link rel="stylesheet" type="text/css" href="/study-angular/_bootstrap/css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="/study-angular/rbranas/listaTelefonica/css/app.css">
+    <script src="/study-angular/_angular/angular.js"></script>
+    <script src="/study-angular/_angular/i18n/angular-locale_pt-br.js"></script>
+    <script src="/study-angular/_angular/angular-messages.js"></script>
+    <script src="/study-angular/rbranas/listaTelefonica/js/app.js"></script>
+    <script src="/study-angular/rbranas/listaTelefonica/controllers/listaTelefonicaCtrl.js"></script>
   </head>
   <body>
     <div ng-controller="listaTelefonicaCtrl">
@@ -131,7 +58,7 @@
         <button class="btn btn-primary btn-block" ng-click="adicionarContato(contato)" ng-disabled="contatoForm.$invalid">Adicionar Contato</button>
         <button class="btn btn-danger btn-block" ng-click="apagarContato(contatos)" ng-if="isContatoSelecionado(contatos)">Apagar Contato</button>
       </div>
-      <div ng-include="'footer.html'"></div>
+      <div ng-include="'view/footer.html'"></div>
     </div>
   </body>
 </html>
