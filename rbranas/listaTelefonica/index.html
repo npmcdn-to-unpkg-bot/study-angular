@@ -5,6 +5,7 @@
     <title>Lista Telefonica</title>
     <link rel="stylesheet" type="text/css" href="/study-angular/_bootstrap/css/bootstrap.css">
     <link rel="stylesheet" type="text/css" href="/study-angular/rbranas/listaTelefonica/css/app.css">
+    <link rel="stylesheet" type="text/css" href="/study-angular/rbranas/listaTelefonica/css/ui.css">
     <script src="/study-angular/_angular/angular.js"></script>
     <script src="/study-angular/_angular/i18n/angular-locale_pt-br.js"></script>
     <script src="/study-angular/_angular/angular-messages.js"></script>
@@ -17,13 +18,18 @@
     <script src="/study-angular/rbranas/listaTelefonica/js/value/configValue.js"></script>
     <script src="/study-angular/rbranas/listaTelefonica/js/filters/nameFilter.js"></script>
     <script src="/study-angular/rbranas/listaTelefonica/js/filters/ellipsisFilter.js"></script>
+    <script src="/study-angular/rbranas/listaTelefonica/js/directives/uiAlertDirective.js"></script>
   </head>
   <body>
     <div ng-controller="listaTelefonicaCtrl">
       <div class="jumbotron">
-        <h4>{{app}}</h4>
+        <h3>{{app}}</h3>
+
+        <ui-alert title="Ops, aconteceu um problema!" message="error">
+          {{error}}
+        </ui-alert>
+
         <input class="form-control" type="text" ng-model="criterioDeBusca" placeholder="O que você esta buscando?">
-        {{message}}
         <table class="table" ng-if="contatos.length > 0">
           <tr>
             <th></th>
