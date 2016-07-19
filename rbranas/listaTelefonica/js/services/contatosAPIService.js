@@ -1,7 +1,7 @@
 app.factory("contatosAPI", function($http, config){
 
   var _getContatos = function(){
-    return $http.get( config.baseUrl + "backend/contatos.jsonx");
+    return $http.get( config.baseUrl + "backend/contatos.json");
   }
 
   var _saveContato = function(contato){

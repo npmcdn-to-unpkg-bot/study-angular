@@ -19,17 +19,18 @@
     <script src="/study-angular/rbranas/listaTelefonica/js/filters/nameFilter.js"></script>
     <script src="/study-angular/rbranas/listaTelefonica/js/filters/ellipsisFilter.js"></script>
     <script src="/study-angular/rbranas/listaTelefonica/js/directives/uiAlertDirective.js"></script>
+    <script src="/study-angular/rbranas/listaTelefonica/js/directives/uiDateDirective.js"></script>
   </head>
   <body>
     <div ng-controller="listaTelefonicaCtrl">
       <div class="jumbotron">
         <h3>{{app}}</h3>
 
-        <ui-alert title="Ops, aconteceu um problema!" message="error">
+        <!-- <ui-alert title="Ops, aconteceu um problema!" message="error">
           {{error}}
-        </ui-alert>
+        </ui-alert> -->
 
-        <input class="form-control" type="text" ng-model="criterioDeBusca" placeholder="O que você esta buscando?">
+        <input class="form-control" type="text" ng-model="criterioDeBusca" placeholder="O que você esta buscando?"/>
         <table class="table" ng-if="contatos.length > 0">
           <tr>
             <th></th>
@@ -52,6 +53,7 @@
         <form name="contatoForm">
           <input class="form-control" type="text" ng-model="contato.nome" name="nome" placeholder="Nome" ng-required="true" ng-minlength="10"/>
           <input class="form-control" type="text" ng-model="contato.telefone" name="telefone" placeholder="Telefone" ng-required="true" ng-pattern="/^\d{4,5}-\d{4}$/"/>
+          <input class="form-control" type="text" ng-model="contato.data" name="data" placeholder="Data" ui-date/>
           <select class="form-control" ng-model="contato.operadora" ng-options="operadora.nome +' ( ' + (operadora.preco | currency) + ')' for operadora in operadoras | orderBy:'nome'">
             <option value="">Selecione uma operadora</option>
           </select>
