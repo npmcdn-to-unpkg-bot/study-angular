@@ -1,3 +1,3 @@
 app.config(function(serialGeneratorProvider){
-  serialGeneratorProvider.setLength(100);
+  serialGeneratorProvider.setLength(6);
 });

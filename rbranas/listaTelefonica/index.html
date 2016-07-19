@@ -15,6 +15,8 @@
     <script src="/study-angular/rbranas/listaTelefonica/js/services/serialGeneratorService.js"></script>
     <script src="/study-angular/rbranas/listaTelefonica/js/config/serialGeneratorConfig.js"></script>
     <script src="/study-angular/rbranas/listaTelefonica/js/value/configValue.js"></script>
+    <script src="/study-angular/rbranas/listaTelefonica/js/filters/nameFilter.js"></script>
+    <script src="/study-angular/rbranas/listaTelefonica/js/filters/ellipsisFilter.js"></script>
   </head>
   <body>
     <div ng-controller="listaTelefonicaCtrl">
@@ -33,8 +35,8 @@
           </tr>
           <tr ng-class="{selecionado:contato.selecionado}" ng-repeat="contato in contatos | filter:criterioDeBusca | orderBy:criterioDeOrdenacao:direcaoDaOrdenacao">
             <td><input type="checkbox" ng-model="contato.selecionado"/></td>
-            <td>{{contato.serial}}</td>
-            <td>{{contato.nome}}</td>
+            <td>{{contato.serial | ellipsis}}</td>
+            <td>{{contato.nome | name | ellipsis:10}}</td>
             <td>{{contato.telefone}}</td>
             <td>{{contato.operadora.nome}}</td>
             <td>{{contato.data * 1000 | date:'dd/MM/yyyy HH:mm:ss'}}</td>
