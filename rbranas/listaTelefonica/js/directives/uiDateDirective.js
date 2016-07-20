@@ -19,7 +19,8 @@ app.directive("uiDate", function($filter){
       ctrl.$parsers.push(function(value){
         if(value.length === 10){
           var dateArray = value.split('/');
-          return new Date(dateArray[2],dateArray[1]-1,dateArray[0]).getTime();
+          var tsDate = new Date(dateArray[2],dateArray[1]-1,dateArray[0]).getTime();
+          return parseInt(tsDate.toString().substring(0,10))
         }
       });
       ctrl.$formatters.push(function(value){
