@@ -1,4 +1,4 @@
-app.directive("uiDate", function(){
+app.directive("uiDate", function($filter){
   return {
     require: "ngModel",
     link: function(scope, element, attrs, ctrl){
