@@ -17,10 +17,15 @@ if(!empty($post)){
 	array_push($contatos, $contato);
 	file_put_contents('contatos.json',json_encode($contatos));
 }
-if($_GET['id']){
+if(isset($_GET['id'])){
+	$response = false;
 	foreach ($contatos as $contato) {
 		if($contato->id == $_GET['id']){
-			echo json_encode($contato);
+			$response = json_encode($contato);
+			echo $response;
 		}
+	}
+	if($response === false){
+		header("HTTP/1.0 404 Not Found");
 	}
 }
