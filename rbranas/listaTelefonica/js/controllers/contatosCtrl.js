@@ -53,5 +53,9 @@ app.controller("contatosCtrl", function($scope, contatos, operadoras, serialGene
     return preco * imposto;
   };
 
+  $scope.reset = function(){
+    $scope.contatos = angular.copy($scope.contatos);
+  }
+
   init();
 });
