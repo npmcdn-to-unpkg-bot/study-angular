@@ -3,7 +3,18 @@ app.controller("contatosCtrl", function($scope, contatos, operadoras, serialGene
   $scope.contatos = contatos.data;
   $scope.operadoras = operadoras.data;
 
-  var generateSerial = function(){
+  var init = function(){
+    calcularImpostos($scope.contatos);
+    generateSerial($scope.contatos);
+  }
+
+  var calcularImpostos = function(contatos){
+    contatos.forEach(function(contato){
+      contato.operadora.precoComImposto = calcularImposto(contato.operadora.preco);
+    });
+  }
+
+  var generateSerial = function(contatos){
     contatos.forEach(function(item){
       item.serial = serialGenerator.generate();
     });
@@ -26,8 +37,8 @@ app.controller("contatosCtrl", function($scope, contatos, operadoras, serialGene
     });
   };
 
-  $scope.isContatoSelecionado = function(contatos){
-    return contatos.some(function(contato){
+  $scope.verificarContatosSelecionado = function(contatos){
+    $scope.hasContatoSelecionado = contatos.some(function(contato){
       return contato.selecionado;
     });
   };
@@ -37,4 +48,10 @@ app.controller("contatosCtrl", function($scope, contatos, operadoras, serialGene
     $scope.direcaoDaOrdenacao = ! $scope.direcaoDaOrdenacao;
   };
 
+  var calcularImposto = function(preco){
+    var imposto = 1.2;
+    return preco * imposto;
+  };
+
+  init();
 });

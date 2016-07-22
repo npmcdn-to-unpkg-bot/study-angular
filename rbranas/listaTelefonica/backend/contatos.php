@@ -8,13 +8,13 @@ function pr($var){
 $contatos = json_decode(file_get_contents("contatos.json"));
 $post = file_get_contents("php://input");
 if(!empty($post)){
-	$contato = json_decode($post);
+	$novoContato = json_decode($post);
 	$maxId = 0;
 	foreach ($contatos as $contato) {
 		$maxId = $contato->id > $maxId ? $contato->id: $maxId;
 	}
-	$contato->id = ++$maxId;
-	array_push($contatos, $contato);
+	$novoContato->id = ++$maxId;
+	array_push($contatos, $novoContato);
 	file_put_contents('contatos.json',json_encode($contatos));
 }
 if(isset($_GET['id'])){
@@ -23,6 +23,7 @@ if(isset($_GET['id'])){
 		if($contato->id == $_GET['id']){
 			$response = json_encode($contato);
 			echo $response;
+			die;
 		}
 	}
 	if($response === false){
